@@ -16,27 +16,20 @@ def wait_and_click(driver, by, value, timeout=100):
         actions.move_to_element(element).click().perform()
     except TimeoutException:
         print(f"Element nicht gefunden oder nicht klickbar: {value}")
-        
-def TwitchSignIn(driver, usr, pw):
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'root')))
-    time.sleep(0.1)
-    keyboard.write(usr, 0.1)
-    time.sleep(0.1)
-    keyboard.send('tab')
-    keyboard.write(pw, 0.1)
-    time.sleep(0.1)
-    keyboard.send('Enter')
 
 def main():
     driver = webdriver.Chrome()
+    time.sleep(2)
+    driver.maximize_window()
 
-    driver.get("https://twitch.facepunch.com/connect")
-    wait_and_click(driver, By.XPATH, "//button[contains(@class, 'button steam')]")
-    wait_and_click(driver, By.ID, "imageLogin")
-    wait_and_click(driver, By.XPATH, "//button[contains(@class, 'button twitch')]")
-    TwitchSignIn(driver, 'Username', 'Password')
+    driver.get("https://store.steampowered.com")
+    time.sleep(1)
+    wait_and_click(driver, By.ID, "global_action_menu")
+    wait_and_click(driver, By.ID, "account_pulldown")
+    wait_and_click(driver, By.ID, "global_actions")
     
-    time.sleep(5)
+    
+    time.sleep(500)
 
     driver.quit()
 
